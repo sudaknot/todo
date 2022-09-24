@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do</title>
+  <style>
+    body {
+        height: 100%;
+        box-sizing: border-box;
+        padding: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        flex-direction: column;
+        background: linear-gradient(0.25turn, lightgreen, lightblue);
+        background-repeat: none;
+        background-attachment: fixed;
+
+        }
+     h1 {
+        border: 2.5px solid black;
+        max-width: 200px;
+        min-width: 10px;
+        padding: 10px 40px;
+
+        }
+     #inputel {
+        width: 220px;
+        margin-bottom: 10px;
+        height: 30px;
+        }
+     button {
+        font-size: 20px;
+        width: 220px;
+        border: 1px solid white;
+        background-color: green;
+        color: white;
+        font-weight: bold;
+        box-shadow: 2px 1px 5px white;
+        transition: ease-in;
+        border-radius: 10px;
+        }
+     button:hover {
+        opacity: 0.8;
+        cursor: pointer;
+        border: 2px solid white;
+
+        transition: ease-in
+        }
+     ul {
+        padding: 0;
+        }
+     li {
+        background-image: linear-gradient(lightgreen, white);
+        position: relative;
+        display: flex;
+        justify-content: space-around;
+        flex-direction: row;
+        color: black;
+        border: 2px solid light green;
+        list-style: none;
+        margin: 10px;
+        font-size: 20px;
+        width: 220px;
+        padding: 4px;
+        padding-bottom: 10px;
+        box-shadow: 2px 2px 6px lightgreen;
+        text-align: center;
+        border-radius: 5px;
+     }
+     li:hover {
+        opacity: 0.8;
+        cursor: pointer;
+        border: 2px solid white;
+        transition: ease-in
+     }
+     .close {
+        position: absolute;
+        left: 180px;
+        width: 15%;
+        scale: .8;
+     }
+
+        #open {
+            margin-top: 5px;
+            width: 26px;
+            font-size: 12px;
+            padding: 4px;
+            }
+        .modalcont {
+            opacity: 0;
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            }
+        .modal {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: white;
+            padding: 10px;
+            border-radius: 15px;
+            height: 100px;
+            width: 250px;
+            max-width: 100%;
+            }
+        .modalcont.show {
+            opacity: 1.0;
+            pointer-events: auto;
+            }
+        .modal button {
+            width: 2em;
+            }
+
+
+
+
+
+
+
+
+  </style>
+</head>
+<body>
+   <h1>To Do List</h1>
+   <input id="inputel" type="text">
+   <button id="buttonel">Add Item</button>'
+   <button id="clearall">Clear</button>
+
+   <button id="open">
+       ?
+   </button>
+
+   <div class="modalcont" id="modalcont">
+       <div class="modal">
+           <p>Click to check item off. Dbl click to remove item.</p>
+           <button id="close">
+               &#10006;
+           </button>
+       </div>
+   </div>
+   <ul id="ulel"></ul>
+<script type="text/javascript">
+        const button = document.getElementById("buttonel")
+        const input = document.getElementById('inputel')
+        const ulEl = document.getElementById('ulel')
+        const clearall = document.getElementById('clearall')
+
+
+        button.addEventListener("click", function() {
+                var li = document.createElement('li');
+                if (input.value === "") {
+                    input.placeholder = "Enter a to-do!"
+                } else {
+                    li.innerText = input.value;
+                    ulEl.appendChild(li);
+                    input.value = ""
+                    input.placeholder = ""
+                    li.addEventListener("click", function() {
+                        li.style.textDecoration = 'line-through';
+                    })
+                    li.addEventListener("dblclick", function() {
+                        ulEl.removeChild(li)
+                    })
+                }
+        })
+
+        clearall.addEventListener("click", function() {
+            ulEl.innerHTML = ""
+        })
+
+        const open = document.getElementById('open')
+        const modalcont = document.getElementById('modalcont')
+        const close = document.getElementById('close')
+
+        open.addEventListener("click", function() {
+            modalcont.classList.add('show')
+        })
+
+        close.addEventListener("click", function() {
+            modalcont.classList.remove('show')
+        })
+
+</script>
+
+
+
+</body>
+</html>
